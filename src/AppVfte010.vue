@@ -2,7 +2,7 @@
 <template>
   <div id="fswaitlayer" class="fa fa-spinner fa-spin"></div>
   <div class="pt-page pt-page-current pt-page-controller search-pager">
-    <PageHeader ref="pageHeader" :labels="labels" pid="vfte010" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages" />
+    <PageHeader ref="pageHeader" :labels="labels" pid="vfte010" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages" :build="buildVersion" />
     <div id="fscontroltablayerpolicy" class="row">
       <ul class="nav nav-tabs navbar-left nav-tabbar-policy">
         <li class="nav-item active">
@@ -52,6 +52,7 @@ import { getLabelModel, getMultiLanguagesModel } from "@willsofts/will-app";
 import { getDefaultLanguage, setDefaultLanguage } from "@willsofts/will-app";
 import { startApplication }  from "@willsofts/will-app";
 
+const buildVersion = process.env.VUE_APP_BUILD_DATETIME;
 export default {
   components: {
     PageHeader, EntryForm, SearchFormWord, SearchFormNumber, EntryFormWord, EntryFormNumber
@@ -60,7 +61,7 @@ export default {
     let labels = ref(getLabelModel());
     const multiLanguages = ref(getMultiLanguagesModel());
     const currentPanel = ref("S");
-    return { multiLanguages, labels, currentPanel };
+    return { buildVersion, multiLanguages, labels, currentPanel };
   },
   mounted() {
     console.log("App: mounted ...");
