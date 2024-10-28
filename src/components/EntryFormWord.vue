@@ -238,7 +238,7 @@
               this.reset(data.body.dataset,{action:"edit"});
               this.v$.$reset();
               this.disabledKeyField = true;
-              this.showDialog();
+              this.showDialog(() => { this.$refs.reservepwd.focus(); });
             }
           }
         });	
