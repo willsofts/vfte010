@@ -2,7 +2,7 @@
 <template>
   <div id="fswaitlayer" class="fa fa-spinner fa-spin"></div>
   <div class="pt-page pt-page-current pt-page-controller search-pager">
-    <PageHeader ref="pageHeader" :labels="labels" pid="vfte010" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages" :build="buildVersion" />
+    <PageHeader ref="pageHeader" :labels="labels" pid="vfte010" version="1.0.0" showLanguage="true" @language-changed="changeLanguage" :multiLanguages="multiLanguages" :build="buildVersion" :visible="displayPageHeader" />
     <div id="fscontroltablayerpolicy" class="row">
       <ul class="nav nav-tabs navbar-left nav-tabbar-policy">
         <li class="nav-item active">
@@ -48,7 +48,7 @@ import SearchFormNumber from '@/components/SearchFormNumber.vue';
 import EntryForm from '@/components/EntryForm.vue';
 import EntryFormWord from '@/components/EntryFormWord.vue';
 import EntryFormNumber from '@/components/EntryFormNumber.vue';
-import { getLabelModel, getMultiLanguagesModel } from "@willsofts/will-app";
+import { getLabelModel, getMultiLanguagesModel, getMetaInfo } from "@willsofts/will-app";
 import { getDefaultLanguage, setDefaultLanguage } from "@willsofts/will-app";
 import { startApplication }  from "@willsofts/will-app";
 
@@ -60,8 +60,9 @@ export default {
   setup() {
     let labels = ref(getLabelModel());
     const multiLanguages = ref(getMultiLanguagesModel());
+	const displayPageHeader = !(String(getMetaInfo().DISPLAY_PAGE_HEADER)=="false");
     const currentPanel = ref("S");
-    return { buildVersion, multiLanguages, labels, currentPanel };
+    return { displayPageHeader, buildVersion, multiLanguages, labels, currentPanel };
   },
   mounted() {
     console.log("App: mounted ...");
