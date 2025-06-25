@@ -50,7 +50,7 @@ import EntryFormWord from '@/components/EntryFormWord.vue';
 import EntryFormNumber from '@/components/EntryFormNumber.vue';
 import { getLabelModel, getMultiLanguagesModel, getMetaInfo } from "@willsofts/will-app";
 import { getDefaultLanguage, setDefaultLanguage } from "@willsofts/will-app";
-import { startApplication }  from "@willsofts/will-app";
+import { startApplication, loadAndMergeLabel }  from "@willsofts/will-app";
 
 const buildVersion = process.env.VUE_APP_BUILD_DATETIME;
 export default {
@@ -79,6 +79,11 @@ export default {
           this.multiLanguages = getMultiLanguagesModel();
           this.messagingHandler(data);
           this.$refs.pageHeader.changeLanguage(getDefaultLanguage());
+          loadAndMergeLabel("vfte010", (success) => {
+            if (success) {
+              this.changeLanguage(getDefaultLanguage());
+            }
+          });
         }
       });
     });
